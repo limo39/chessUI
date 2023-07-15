@@ -7,6 +7,7 @@ class Square extends StatelessWidget {
   final ChessPiece? piece;
   final bool isSelected;
   final void Function()? onTap;
+  final bool isValidMove;
 
   const Square({
     super.key,
@@ -14,6 +15,7 @@ class Square extends StatelessWidget {
     required this.piece,
     required this.isSelected,
     required this.onTap,
+    required this.isValidMove,
   });
 
   @override

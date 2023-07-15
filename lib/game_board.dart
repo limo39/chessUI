@@ -27,6 +27,7 @@ class _GameBoardState extends State<GameBoard> {
     _initializeBoard();
   }
 
+  // initialize board
   void _initializeBoard() {
     List<List<ChessPiece?>> newBoard =
         List.generate(8, (index) => List.generate(8, (index) => null));
@@ -129,14 +130,23 @@ class _GameBoardState extends State<GameBoard> {
         selectedPiece = board[row][col];
         selectedRow = row;
         selectedCol = col;
+      } else if (selectedPiece != null &&
+          validMoves.any((element) => element[0] == row && element[1] == col)) {
+        movePiece(row, col);
       }
+
       validMoves =
           calculateRawValidMoves(selectedRow, selectedCol, selectedPiece);
     });
   }
 
+  // Calculate moves
   List<List<int>> calculateRawValidMoves(int row, int col, ChessPiece? piece) {
     List<List<int>> candidateMoves = [];
+
+    if (piece == null) {
+      return [];
+    }
 
     int direction = piece!.isWhite ? -1 : 1;
 
@@ -215,7 +225,7 @@ class _GameBoardState extends State<GameBoard> {
             continue;
           }
           if (board[newRow][newCol] != null) {
-            if (board([newRow], [newCol])!.isWhite != piece.isWhite) {
+            if (board[newRow][newCol]!.isWhite != piece.isWhite) {
               candidateMoves.add([newRow, newCol]); // kill
             }
             continue;
@@ -224,14 +234,108 @@ class _GameBoardState extends State<GameBoard> {
         }
         break;
       case ChessPieceType.bishop:
+        var directions = [
+          [-1, -1],
+          [-1, 1],
+          [1, -1],
+          [1, 1],
+        ];
+
+        for (var direction in directions) {
+          var i = 1;
+          while (true) {
+            var newRow = row + i * direction[0];
+            var newCol = col + i * direction[1];
+            if (!isInBoard(newRow, newCol)) {
+              break;
+            }
+            if (board[newRow][newCol] != null) {
+              if (board[newRow][newCol]!.isWhite != piece.isWhite) {
+                candidateMoves.add([newRow, newCol]); // kill
+              }
+              break;
+            }
+            i++;
+          }
+        }
         break;
       case ChessPieceType.queen:
+        var directions = [
+          [-1, 0],
+          [1, 0],
+          [0, -1],
+          [0, 1],
+          [-1, -1],
+          [-1, 1],
+          [1, 1],
+        ];
+
+        for (var direction in directions) {
+          var i = 1;
+          while (true) {
+            var newRow = row + i * direction[0];
+            var newCol = col + i * direction[1];
+            if (!isInBoard(newRow, newCol)) {
+              break;
+            }
+            if (board[newRow][newCol] != null) {
+              if (board[newRow][newCol]!.isWhite != piece.isWhite) {
+                candidateMoves.add([newRow, newCol]); // kill
+              }
+              break;
+            }
+            i++;
+          }
+        }
         break;
       case ChessPieceType.king:
+        var directions = [
+          [-1, 0],
+          [1, 0],
+          [0, -1],
+          [0, 1],
+          [-1, -1],
+          [-1, 1],
+          [1, 1],
+        ];
+        for (var direction in directions) {
+          var newRow = row + direction[0];
+          var newCol = col + direction[1];
+          if (!isInBoard(newRow, newCol)) {
+            continue;
+          }
+          if (board[newRow][newCol] != null) {
+            if (board[newRow][newCol]!.isWhite != piece.isWhite) {
+              candidateMoves.add([newRow, newCol]); // kill
+            }
+            continue;
+          }
+          candidateMoves.add([newRow, newCol]);
+        }
+
         break;
       default:
     }
     return candidateMoves;
+  }
+
+  // isInBoard Error
+  bool isInBoard(int row, int col) {
+    return row >= 0 && row < 8 && col >= 0 && col < 8;
+  }
+
+  // move piece
+  void movePiece(int newRow, int newCol) {
+    board[newRow][newCol] = selectedPiece;
+    board[selectedRow][selectedCol] = null;
+
+    // clear
+    setState(() {
+      selectedPiece = null;
+      selectedRow = -1;
+      selectedCol = -1;
+      validMoves = [];
+    });
   }
 
   @override
