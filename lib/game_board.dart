@@ -53,89 +53,81 @@ class _GameBoardState extends State<GameBoard> {
       newBoard[1][i] = ChessPiece(
           type: ChessPieceType.pawn,
           isWhite: false,
-          imagePath: 'images.pawn.png');
+          imagePath: 'images/BP.gif');
 
       newBoard[6][i] = ChessPiece(
-          type: ChessPieceType.pawn,
-          isWhite: true,
-          imagePath: 'images.pawn.png');
+          type: ChessPieceType.pawn, isWhite: true, imagePath: 'images/WP.gif');
 
       // Rooks
       newBoard[0][0] = ChessPiece(
           type: ChessPieceType.rook,
           isWhite: false,
-          imagePath: 'images/rook.jfif');
+          imagePath: 'images/BR.gif');
       newBoard[0][7] = ChessPiece(
           type: ChessPieceType.rook,
           isWhite: false,
-          imagePath: 'images/rook.jfif');
+          imagePath: 'images/BR.gif');
       newBoard[7][0] = ChessPiece(
-          type: ChessPieceType.rook,
-          isWhite: true,
-          imagePath: 'images/rook.jfif');
+          type: ChessPieceType.rook, isWhite: true, imagePath: 'images/WR.gif');
       newBoard[7][7] = ChessPiece(
-          type: ChessPieceType.rook,
-          isWhite: true,
-          imagePath: 'images/rook.jfif');
+          type: ChessPieceType.rook, isWhite: true, imagePath: 'images/WR.gif');
 
       // Knights
       newBoard[0][1] = ChessPiece(
         type: ChessPieceType.knight,
         isWhite: false,
-        imagePath: 'images/knight.png',
+        imagePath: 'images/BN.gif',
       );
       newBoard[0][6] = ChessPiece(
         type: ChessPieceType.knight,
         isWhite: false,
-        imagePath: 'images/knight.png',
+        imagePath: 'images/BN.gif',
       );
       newBoard[7][1] = ChessPiece(
         type: ChessPieceType.knight,
         isWhite: true,
-        imagePath: 'images/knight.png',
+        imagePath: 'images/WN.gif',
       );
       newBoard[7][6] = ChessPiece(
         type: ChessPieceType.knight,
         isWhite: true,
-        imagePath: 'images/knight.png',
+        imagePath: 'images/WN.gif',
       );
       // Bishop
       newBoard[0][2] = ChessPiece(
           type: ChessPieceType.bishop,
           isWhite: false,
-          imagePath: 'images/bishop.png');
+          imagePath: 'images/BB.gif');
       newBoard[0][5] = ChessPiece(
           type: ChessPieceType.bishop,
           isWhite: false,
-          imagePath: 'images/bishop.png');
+          imagePath: 'images/BB.gif');
       newBoard[7][2] = ChessPiece(
           type: ChessPieceType.bishop,
           isWhite: true,
-          imagePath: 'images/bishop.png');
+          imagePath: 'images/WB.gif');
       newBoard[7][5] = ChessPiece(
           type: ChessPieceType.bishop,
           isWhite: true,
-          imagePath: 'images/bishop.png');
+          imagePath: 'images/WB.gif');
 
       // Queens
       newBoard[0][3] = ChessPiece(
           type: ChessPieceType.queen,
           isWhite: false,
-          imagePath: 'images/queen.png');
+          imagePath: 'images/BQ.gif');
       newBoard[7][4] = ChessPiece(
           type: ChessPieceType.queen,
           isWhite: true,
-          imagePath: 'images/queen.png');
+          imagePath: 'images/WQ.gif');
 
       // Kings
       newBoard[0][4] = ChessPiece(
           type: ChessPieceType.king,
           isWhite: false,
-          imagePath: 'images/king.png');
+          imagePath: 'images/BK.gif');
       newBoard[7][3] = ChessPiece(
-          type: ChessPieceType.king,
-          isWhite: true,
-          imagePath: 'images/king.png');
+          type: ChessPieceType.king, isWhite: true, imagePath: 'images/WK.gif');
     }
     board = newBoard;
   }
